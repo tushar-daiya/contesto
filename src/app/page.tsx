@@ -1,103 +1,382 @@
-import Image from "next/image";
+"use client";
+import ContestCard from "@/components/ContestCard";
+import FeatureCard from "@/components/FeatureCard";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Bell,
+  Calendar,
+  Clock,
+  Funnel,
+  Mail,
+  MessageSquare,
+  Code2,
+  Binary,
+  BrainCircuit,
+} from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+const contests = [
+  {
+    title: "Codeforces Round #1234 (Div. 2)",
+    startTime: "2025-05-21 14:30:00",
+    duration: 7200,
+    platform: "codeforces",
+    contestId: 1234,
+    id: "codeforces-1234",
+  },
+  {
+    title: "LeetCode Weekly Contest 123",
+    startTime: "2025-05-22 12:00:00",
+    duration: 7200,
+    platform: "leetcode",
+    contestId: 123,
+    id: "leetcode-123",
+  },
+  {
+    title: "CodeChef Long Challenge",
+    startTime: "2025-05-23 15:00:00",
+    duration: 86400,
+    platform: "codechef",
+    contestId: 456,
+    id: "codechef-456",
+  },
+  {
+    title: "Codeforces Round #1235 (Div. 2)",
+    startTime: "2025-05-24 14:30:00",
+    duration: 7200,
+    platform: "codeforces",
+    contestId: 1235,
+    id: "codeforces-1235",
+  },
+  {
+    title: "LeetCode Biweekly Contest 45",
+    startTime: "2025-05-25 12:00:00",
+    duration: 7200,
+    platform: "leetcode",
+    contestId: 45,
+    id: "leetcode-45",
+  },
+];
+
+const features = [
+  {
+    id: 1,
+    title: "Platform Filters",
+    description:
+      "Filter contests by your preferred platforms like LeetCode, Codeforces, and CodeChef.",
+    icon: <Funnel className="h-6 w-6 text-primary" />,
+    status: "available",
+  },
+  {
+    id: 2,
+    title: "Calendar Integration",
+    description:
+      "Add contests to your Google or Apple calendar with a single click.",
+    icon: <Calendar className="h-6 w-6 text-primary" />,
+    status: "available",
+  },
+  {
+    id: 3,
+    title: "Email Reminders",
+    description:
+      "Get notified about upcoming contests via email at your preferred time.",
+    icon: <Mail className="h-6 w-6 text-primary" />,
+    status: "available",
+  },
+  {
+    id: 4,
+    title: "Discord Notifications",
+    description: "Receive timely reminders directly to your Discord account.",
+    icon: <MessageSquare className="h-6 w-6 text-primary" />,
+    status: "available",
+  },
+  {
+    id: 5,
+    title: "Countdown Timers",
+    description:
+      "Never miss a contest with accurate countdown timers for all events.",
+    icon: <Clock className="h-6 w-6 text-primary" />,
+    status: "available",
+  },
+  {
+    id: 6,
+    title: "Custom Alerts",
+    description:
+      "Set up custom alerts for specific contests, platforms, or time periods.",
+    icon: <Bell className="h-6 w-6 text-primary" />,
+    status: "available",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="relative overflow-hidden h-screen">
+
+      {/* Floating icons */}
+      <div className="max-w-7xl overflow-hidden h-screen mx-auto pt-80 flex items-center flex-col relative z-10">
+      <motion.div
+        className="absolute top-40 left-10"
+        animate={{
+          y: [0, -50, 0],
+          rotate: [0, 40, 0],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <Code2 className="w-20 h-20 text-primary/50" />
+      </motion.div>
+      <motion.div
+        className="absolute top-[60%] right-40"
+        animate={{
+          y: [0, 50, 0],
+          rotate: [0, -40, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <Binary className="w-20 h-20 text-primary/50" />
+      </motion.div>
+      <motion.div
+        className="absolute top-60 right-32"
+        animate={{
+          y: [0, -30, 0],
+          x: [0, 30, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <BrainCircuit className="w-20 h-20 text-primary/50" />
+      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Badge variant={"secondary"} className="text-base rounded-full px-4">
+            The ultimate contest tracker for competitive programmers
+          </Badge>
+        </motion.div>
+        
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-7xl font-bold mt-8 text-center max-w-3xl"
+        >
+          Never miss a <span className="text-primary">contest</span> again.
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 text-lg text-muted-foreground max-w-xl text-center"
+        >
+          Track upcoming contests from all major platforms in one place —
+          LeetCode, Codeforces, CodeChef, and more.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button asChild className="mt-8 text-2xl py-6 px-8" size={"lg"}>
+            <Link href={"/signin"}>Get Started</Link>
+          </Button>
+        </motion.div>
+      </div>
+      </div>
+      <div id="contests" className="bg-muted">
+        <div className="max-w-7xl mx-auto flex items-center flex-col py-20 px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-medium text-accent-foreground"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Upcoming Contests
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-4 text-lg text-muted-foreground text-center"
           >
-            Read our docs
-          </a>
+            Never miss a programming challenge with our comprehensive contest
+            calendar.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex space-x-4 mt-8"
+          >
+            <Badge variant={"leetcode"} className="text-lg rounded-full px-4">
+              Leetcode
+            </Badge>
+            <Badge variant={"codeforces"} className="text-lg rounded-full px-4">
+              Codeforces
+            </Badge>
+            <Badge variant={"codechef"} className="text-lg rounded-full px-4">
+              Codechef
+            </Badge>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            {contests.map((contest, index) => (
+              <motion.div
+                key={contest.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 * index }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <ContestCard
+                  title={contest.title}
+                  startTime={contest.startTime}
+                  duration={contest.duration}
+                  platform={contest.platform}
+                  contestId={contest.contestId}
+                  id={contest.id}
+                />
+              </motion.div>
+            ))}
+          </div>
+          <motion.div
+            className="mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Link href={"/"} className="text-blue-500">
+              View All Contests -{">"}
+            </Link>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </div>
+      <div id="features" className="max-w-7xl mx-auto flex items-center flex-col py-20 px-8">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-medium text-accent-foreground"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Everything You Need
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-4 text-lg text-muted-foreground text-center max-w-xl"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Contesto offers a comprehensive set of features to keep your
+          competitive programming schedule organized.
+        </motion.p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <FeatureCard
+                description={feature.description}
+                title={feature.title}
+                icon={feature.icon}
+                status={feature.status}
+              />
+            </motion.div>
+          ))}
+        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-16 md:mt-24 bg-muted rounded-2xl p-8 lg:p-12 relative overflow-hidden w-full"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full -mr-16 -mt-16 blur-3xl"
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.1, 0.3, 0.1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-0 left-0 w-64 h-64 bg-accent rounded-full -ml-16 -mb-16 blur-3xl"
+          />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center lg:text-left"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                Ready to never miss a contest?
+              </h3>
+              <p className="text-muted-foreground max-w-lg">
+                Join thousands of competitive programmers who use Contesto to
+                stay on top of their game.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button asChild className="text-xl py-4 px-6" size={"lg"}>
+                <Link href={"/signin"}>Get Started</Link>
+              </Button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
