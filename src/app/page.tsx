@@ -117,7 +117,7 @@ export default function Home() {
       <div className="relative overflow-hidden h-screen">
 
       {/* Floating icons */}
-      <div className="max-w-7xl overflow-hidden h-screen mx-auto pt-80 flex items-center flex-col relative z-10">
+      <div className="max-w-7xl overflow-hidden h-screen mx-auto pt-60 flex items-center flex-col relative z-10">
       <motion.div
         className="absolute top-40 left-10"
         animate={{

@@ -12,10 +12,10 @@ export default function ContestCard({
   id,
 }: {
   title: string;
-  startTime: string;
+  startTime: Date;
   duration: number;
   platform: string;
-  contestId: number;
+  contestId: string;
   id: string;
 }) {
   return (
@@ -32,23 +32,27 @@ export default function ContestCard({
       >
         {platform}
       </Badge>
-      <h2 className="text-xl font-semibold mt-4">{title}</h2>
+      <h2 className="text-xl font-semibold mt-4 text-nowrap">
+        {title.length > 25 ? title.substring(0, 25) + "..." : title}
+      </h2>
       <div className="flex items-center gap-2 mt-2">
         <Calendar className="text-muted-foreground" size={16} />
         <span className="text-muted-foreground">
-          {format(new Date(startTime), "MMMM d, yyyy")}
+          {format(startTime, "MMMM d, yyyy")}
         </span>
       </div>
       <div className="flex items-center gap-2 mt-2">
         <Clock className="text-muted-foreground" size={16} />
         <span className="text-muted-foreground">
-          {format(new Date(startTime), "hh:mm")} - {duration / 3600} hours
+          {format(startTime, "HH:mm")} - {duration / 3600} hours
         </span>
       </div>
       <Separator className="bg-accent-foreground/20 my-4" />
       <div className="flex justify-between items-center">
-        <Link href={'/'}>View Contest</Link>
-        <Link href={'/'} className="text-blue-500">Set Reminder</Link>
+        <Link href={"/"}>View Contest</Link>
+        <Link href={"/"} className="text-blue-500">
+          Set Reminder
+        </Link>
       </div>
     </div>
   );
