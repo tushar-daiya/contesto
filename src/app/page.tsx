@@ -197,7 +197,7 @@ export default function Home() {
           whileTap={{ scale: 0.95 }}
         >
           <Button asChild className="mt-8 text-2xl py-6 px-8" size={"lg"}>
-            <Link href={"/signin"}>Get Started</Link>
+            <Link href={"/auth"}>Get Started</Link>
           </Button>
         </motion.div>
       </div>
@@ -371,7 +371,7 @@ export default function Home() {
               whileTap={{ scale: 0.95 }}
             >
               <Button asChild className="text-xl py-4 px-6" size={"lg"}>
-                <Link href={"/signin"}>Get Started</Link>
+                <Link href={"/auth"}>Get Started</Link>
               </Button>
             </motion.div>
           </div>
