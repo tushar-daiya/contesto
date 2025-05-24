@@ -22,6 +22,7 @@ async function getData() {
 }
 export default async function UpcomingContests() {
   const data: Contest[] = await getData();
+  console.log("Upcoming Contests:");
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">Upcoming Contests</h2>
@@ -30,6 +31,7 @@ export default async function UpcomingContests() {
           <ContestCard
             key={contest.id}
             id={contest.id}
+            type="upcoming"
             title={contest.title}
             startTime={contest.startTime}
             platform={contest.platform}

@@ -10,6 +10,7 @@ export default function ContestCard({
   platform,
   contestId,
   id,
+  type,
 }: {
   title: string;
   startTime: Date;
@@ -17,6 +18,7 @@ export default function ContestCard({
   platform: string;
   contestId: string;
   id: string;
+  type: "upcoming" | "past";
 }) {
   return (
     <div className="p-4 border rounded-lg shadow-md bg-card">
@@ -48,12 +50,19 @@ export default function ContestCard({
         </span>
       </div>
       <Separator className="bg-accent-foreground/20 my-4" />
-      <div className="flex justify-between items-center">
-        <Link href={"/"}>View Contest</Link>
-        <Link href={"/"} className="text-blue-500">
-          Set Reminder
+      {type === "upcoming" ? (
+        <div className="flex justify-between items-center">
+          <Link href={"/"}>View Contest</Link>
+
+          <Link href={"/"} className="text-blue-500">
+            Set Reminder
+          </Link>
+        </div>
+      ) : (
+        <Link href={`/`}>
+          View Contest
         </Link>
-      </div>
+      )}
     </div>
   );
 }

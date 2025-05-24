@@ -18,7 +18,7 @@ export default async function Header() {
           {session?.user ? (
             <ul className="flex items-center space-x-4 ml-8">
               <li>
-                <Link href={"/dashboard/contests"}>Contests</Link>
+                <Link href={"/dashboard"}>Contests</Link>
               </li>
               <li>
                 <Link href={"/dashboard/bookmarks"}>Bookmarks</Link>

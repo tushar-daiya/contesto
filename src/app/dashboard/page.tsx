@@ -1,5 +1,11 @@
+import PastContests from "@/components/server-components/PastContests";
 import UpcomingContests from "@/components/server-components/UpcomingContests";
 
 export default function page() {
-  return <UpcomingContests />;
+  return (
+    <div>
+      <UpcomingContests />
+      <PastContests />
+    </div>
+  );
 }
