@@ -1,8 +1,16 @@
-import { Calendar, Clock } from "lucide-react";
+import { Bookmark, Calendar, Clock } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { format } from "date-fns";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+import BookmarkButton from "./BookmarkButton";
 export default function ContestCard({
   title,
   startTime,
@@ -11,6 +19,7 @@ export default function ContestCard({
   contestId,
   id,
   type,
+  isBookmarked,
 }: {
   title: string;
   startTime: Date;
@@ -19,21 +28,25 @@ export default function ContestCard({
   contestId: string;
   id: string;
   type: "upcoming" | "past";
+  isBookmarked?: boolean;
 }) {
   return (
     <div className="p-4 border rounded-lg shadow-md bg-card">
-      <Badge
-        variant={
-          platform === "leetcode"
-            ? "leetcode"
-            : platform === "codeforces"
-            ? "codeforces"
-            : "codechef"
-        }
-        className=" text-base rounded-full px-3"
-      >
-        {platform}
-      </Badge>
+      <div className="flex items-center justify-between">
+        <Badge
+          variant={
+            platform === "leetcode"
+              ? "leetcode"
+              : platform === "codeforces"
+              ? "codeforces"
+              : "codechef"
+          }
+          className=" text-base rounded-full px-3"
+        >
+          {platform}
+        </Badge>
+        <BookmarkButton contestId={contestId} isBookmarked={isBookmarked} />
+      </div>
       <h2 className="text-xl font-semibold mt-4 text-nowrap">
         {title.length > 25 ? title.substring(0, 25) + "..." : title}
       </h2>
@@ -59,9 +72,7 @@ export default function ContestCard({
           </Link>
         </div>
       ) : (
-        <Link href={`/`}>
-          View Contest
-        </Link>
+        <Link href={`/`}>View Contest</Link>
       )}
     </div>
   );

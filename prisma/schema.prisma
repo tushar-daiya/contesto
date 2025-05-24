@@ -31,12 +31,13 @@ model Contest {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  bookmarks Bookmark[]
 
   @@unique([platform, contestId])
 }
 
 model User {
-  id            String    @id
+  id            String     @id
   name          String
   email         String
   emailVerified Boolean
@@ -45,9 +46,21 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  bookmarks      Bookmark[]
 
   @@unique([email])
   @@map("user")
+}
+
+model Bookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contestId String
+  contest   Contest  @relation(fields: [contestId], references: [contestId], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, contestId])
 }
 
 model Session {
