@@ -98,7 +98,7 @@ export async function GET() {
       data: allContests,
       skipDuplicates: true,
     });
-    return NextResponse.json({ contests: allContests }, { status: 200 });
+    return NextResponse.json({ message: "Contests added successfully"}, { status: 200 });
   } catch (error) {
     console.error("Error fetching contests:", error);
     return NextResponse.json(
