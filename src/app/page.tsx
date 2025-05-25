@@ -259,7 +259,6 @@ export default function Home() {
                   platform={contest.platform}
                   contestId={contest.contestId}
                   page="home"
-                  id={contest.id}
                 />
               </motion.div>
             ))}

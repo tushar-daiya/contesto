@@ -1,6 +1,6 @@
-import { PrismaClient } from "../src/generated/prisma";
+import { Platform, PrismaClient } from "../generated/prisma";
 import axios from "axios";
-
+import {CodechefContest,LeetCodeContest,CodeforcesContest} from "@/lib/types"
 const prisma = new PrismaClient();
 async function fetchLeetCodeContests() {
   try {
@@ -18,15 +18,15 @@ async function fetchLeetCodeContests() {
       method: "post",
       url: "https://leetcode.com/graphql/",
       data: data,
-      headers:{
-        'Content-Type': 'application/json',
-      }
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     const response = await axios.request(config);
-    const contests = response.data.data.allContests;
-    return contests.map((contest: any) => {
+    const contests:LeetCodeContest[] = response.data.data.allContests;
+    return contests.map((contest: LeetCodeContest) => {
       return {
-        platform: "leetcode",
+        platform: Platform.leetcode,
         contestId: contest.titleSlug,
         title: contest.title,
         startTime: new Date(contest.startTime * 1000),
@@ -42,10 +42,10 @@ async function fetchLeetCodeContests() {
 async function fetchCodeforcesContests() {
   try {
     const response = await axios.get("https://codeforces.com/api/contest.list");
-    const contests = response.data.result;
-    return contests.map((contest: any) => {
+    const contests:CodeforcesContest[] = response.data.result;
+    return contests.map((contest: CodeforcesContest) => {
       return {
-        platform: "codeforces",
+        platform: Platform.codeforces,
         contestId: contest.id.toString(),
         title: contest.name,
         startTime: new Date(contest.startTimeSeconds * 1000),
@@ -60,8 +60,8 @@ async function fetchCodeforcesContests() {
 
 async function fetchCodechefContests() {
   try {
-    let lastResponse = [];
-    let contests = [];
+    let lastResponse:CodechefContest[] = [];
+    let contests:CodechefContest[] = [];
     let offset = 0;
     do {
       const response = await axios.get(
@@ -73,13 +73,13 @@ async function fetchCodechefContests() {
       contests.push(...lastResponse);
       offset += lastResponse.length;
     } while (lastResponse.length != 0);
-    return contests.map((contest: any) => {
+    return contests.map((contest: CodechefContest) => {
       return {
-        platform: "codechef",
+        platform: Platform.codechef,
         contestId: contest.contest_code,
         title: contest.contest_name,
         startTime: new Date(contest.contest_start_date_iso),
-        duration: Number(contest.contest_duration)*60,
+        duration: Number(contest.contest_duration) * 60,
       };
     });
   } catch (error) {
@@ -107,4 +107,4 @@ async function main() {
   }
 }
 
-main()
+main();

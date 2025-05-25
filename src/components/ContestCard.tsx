@@ -1,4 +1,4 @@
-import { Bookmark, Calendar, Clock } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { format } from "date-fns";
 import { Separator } from "./ui/separator";
@@ -11,7 +11,6 @@ export default function ContestCard({
   duration,
   platform,
   contestId,
-  id,
   type,
   isBookmarked,
   page,
@@ -21,7 +20,6 @@ export default function ContestCard({
   duration: number;
   platform: string;
   contestId: string;
-  id: string;
   type: "upcoming" | "past";
   page?: "bookmarks" | "dashboard" | "home";
   isBookmarked?: boolean;

@@ -41,6 +41,7 @@ export default function BookmarkButton({
         toast.error(res.message || "Failed to bookmark contest");
       }
     } catch (error) {
+      console.error("Error bookmarking contest:", error);
       setIsBookmarkedState(!newState); // Revert state
       toast.error("Failed to bookmark contest");
     }

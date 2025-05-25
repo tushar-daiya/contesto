@@ -50,7 +50,6 @@ export default async function page() {
           {data.map((contest) => (
             <ContestCard
               key={contest.id}
-              id={contest.id}
               type="upcoming"
               title={contest.title}
               startTime={contest.startTime}

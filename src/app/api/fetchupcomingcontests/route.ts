@@ -1,17 +1,21 @@
 import prisma from "@/lib/prisma";
 import axios from "axios";
 import { NextResponse } from "next/server";
+import { Platform } from "../../../../generated/prisma";
+import { CodechefContest, CodeforcesContest, LeetCodeContest } from "@/lib/types";
+
+
 
 async function fetchCodeforcesContests() {
   try {
     const response = await axios.get("https://codeforces.com/api/contest.list");
-    const contests = response.data.result;
+    const contests:CodeforcesContest[] = response.data.result;
     const upcomingContests = contests.filter(
-      (contest: any) => contest.phase === "BEFORE"
+      (contest:CodeforcesContest) => contest.phase === "BEFORE"
     );
-    return upcomingContests.map((contest: any) => {
+    return upcomingContests.map((contest: CodeforcesContest) => {
       return {
-        platform: "codeforces",
+        platform: Platform.codeforces,
         contestId: contest.id.toString(),
         title: contest.name,
         startTime: new Date(contest.startTimeSeconds * 1000),
@@ -29,10 +33,10 @@ async function fetchCodechefContests() {
     const response = await axios.get(
       "https://www.codechef.com/api/list/contests/future"
     );
-    const contests = response.data.contests;
-    return contests.map((contest: any) => {
+    const contests:CodechefContest[] = response.data.contests;
+    return contests.map((contest: CodechefContest) => {
       return {
-        platform: "codechef",
+        platform: Platform.codechef,
         contestId: contest.contest_code,
         title: contest.contest_name,
         startTime: new Date(contest.contest_start_date_iso),
@@ -47,7 +51,7 @@ async function fetchCodechefContests() {
 
 async function fetchLeetcodeContests() {
   try {
-    let data = JSON.stringify({
+    const data = JSON.stringify({
       query: `query {
             upcomingContests {
               title
@@ -57,7 +61,7 @@ async function fetchLeetcodeContests() {
           }`,
       variables: {},
     });
-    let config = {
+    const config = {
       method: "post",
       url: "https://leetcode.com/graphql/",
       data: data,
@@ -66,10 +70,10 @@ async function fetchLeetcodeContests() {
       },
     };
     const response = await axios.request(config);
-    const contests = response.data.data.upcomingContests;
-    return contests.map((contest: any) => {
+    const contests:LeetCodeContest[] = response.data.data.upcomingContests;
+    return contests.map((contest: LeetCodeContest) => {
       return {
-        platform: "leetcode",
+        platform: Platform.leetcode,
         contestId: contest.titleSlug,
         title: contest.title,
         startTime: new Date(contest.startTime * 1000),
