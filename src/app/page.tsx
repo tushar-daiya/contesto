@@ -20,42 +20,42 @@ import { motion } from "framer-motion";
 const contests = [
   {
     title: "Codeforces Round #1234 (Div. 2)",
-    startTime: "2025-05-21 14:30:00",
+    startTime: new Date("2025-05-20T14:30:00Z"),
     duration: 7200,
     platform: "codeforces",
-    contestId: 1234,
+    contestId: "1234",
     id: "codeforces-1234",
   },
   {
     title: "LeetCode Weekly Contest 123",
-    startTime: "2025-05-22 12:00:00",
+    startTime: new Date("2025-05-21T12:00:00Z"),
     duration: 7200,
     platform: "leetcode",
-    contestId: 123,
+    contestId: "123",
     id: "leetcode-123",
   },
   {
     title: "CodeChef Long Challenge",
-    startTime: "2025-05-23 15:00:00",
+    startTime: new Date("2025-05-22T00:00:00Z"),
     duration: 86400,
     platform: "codechef",
-    contestId: 456,
+    contestId: "456",
     id: "codechef-456",
   },
   {
     title: "Codeforces Round #1235 (Div. 2)",
-    startTime: "2025-05-24 14:30:00",
+    startTime: new Date("2025-05-24T15:00:00Z"),
     duration: 7200,
     platform: "codeforces",
-    contestId: 1235,
+    contestId: "1235",
     id: "codeforces-1235",
   },
   {
     title: "LeetCode Biweekly Contest 45",
-    startTime: "2025-05-25 12:00:00",
+    startTime: new Date("2025-05-25T10:00:00Z"),
     duration: 7200,
     platform: "leetcode",
-    contestId: 45,
+    contestId: "45",
     id: "leetcode-45",
   },
 ];
@@ -113,94 +113,95 @@ const features = [
 export default function Home() {
   return (
     <div>
-
       <div className="relative overflow-hidden h-screen">
+        {/* Floating icons */}
+        <div className="max-w-7xl overflow-hidden h-screen mx-auto pt-60 flex items-center flex-col relative z-10">
+          <motion.div
+            className="absolute top-40 left-10"
+            animate={{
+              y: [0, -50, 0],
+              rotate: [0, 40, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Code2 className="w-20 h-20 text-primary/50" />
+          </motion.div>
+          <motion.div
+            className="absolute top-[60%] right-40"
+            animate={{
+              y: [0, 50, 0],
+              rotate: [0, -40, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Binary className="w-20 h-20 text-primary/50" />
+          </motion.div>
+          <motion.div
+            className="absolute top-60 right-32"
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 30, 0],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <BrainCircuit className="w-20 h-20 text-primary/50" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Badge
+              variant={"secondary"}
+              className="text-base rounded-full px-4"
+            >
+              The ultimate contest tracker for competitive programmers
+            </Badge>
+          </motion.div>
 
-      {/* Floating icons */}
-      <div className="max-w-7xl overflow-hidden h-screen mx-auto pt-60 flex items-center flex-col relative z-10">
-      <motion.div
-        className="absolute top-40 left-10"
-        animate={{
-          y: [0, -50, 0],
-          rotate: [0, 40, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Code2 className="w-20 h-20 text-primary/50" />
-      </motion.div>
-      <motion.div
-        className="absolute top-[60%] right-40"
-        animate={{
-          y: [0, 50, 0],
-          rotate: [0, -40, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Binary className="w-20 h-20 text-primary/50" />
-      </motion.div>
-      <motion.div
-        className="absolute top-60 right-32"
-        animate={{
-          y: [0, -30, 0],
-          x: [0, 30, 0],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <BrainCircuit className="w-20 h-20 text-primary/50" />
-      </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge variant={"secondary"} className="text-base rounded-full px-4">
-            The ultimate contest tracker for competitive programmers
-          </Badge>
-        </motion.div>
-        
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-7xl font-bold mt-8 text-center max-w-3xl"
-        >
-          Never miss a <span className="text-primary">contest</span> again.
-        </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-7xl font-bold mt-8 text-center max-w-3xl"
+          >
+            Never miss a <span className="text-primary">contest</span> again.
+          </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 text-lg text-muted-foreground max-w-xl text-center"
-        >
-          Track upcoming contests from all major platforms in one place —
-          LeetCode, Codeforces, CodeChef, and more.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-8 text-lg text-muted-foreground max-w-xl text-center"
+          >
+            Track upcoming contests from all major platforms in one place —
+            LeetCode, Codeforces, CodeChef, and more.
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button asChild className="mt-8 text-2xl py-6 px-8" size={"lg"}>
-            <Link href={"/auth"}>Get Started</Link>
-          </Button>
-        </motion.div>
-      </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button asChild className="mt-8 text-2xl py-6 px-8" size={"lg"}>
+              <Link href={"/auth"}>Get Started</Link>
+            </Button>
+          </motion.div>
+        </div>
       </div>
       <div id="contests" className="bg-muted">
         <div className="max-w-7xl mx-auto flex items-center flex-col py-20 px-8">
@@ -251,11 +252,13 @@ export default function Home() {
                 whileHover={{ scale: 1.02 }}
               >
                 <ContestCard
+                  type="past"
                   title={contest.title}
                   startTime={contest.startTime}
                   duration={contest.duration}
                   platform={contest.platform}
                   contestId={contest.contestId}
+                  page="home"
                   id={contest.id}
                 />
               </motion.div>
@@ -269,13 +272,16 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.6 }}
             whileHover={{ scale: 1.05 }}
           >
-            <Link href={"/"} className="text-blue-500">
+            <Link href={"/dashboard"} className="text-blue-500">
               View All Contests -{">"}
             </Link>
           </motion.div>
         </div>
       </div>
-      <div id="features" className="max-w-7xl mx-auto flex items-center flex-col py-20 px-8">
+      <div
+        id="features"
+        className="max-w-7xl mx-auto flex items-center flex-col py-20 px-8"
+      >
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

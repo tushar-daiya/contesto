@@ -3,14 +3,8 @@ import { Badge } from "./ui/badge";
 import { format } from "date-fns";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import BookmarkButton from "./BookmarkButton";
+import { getCalendarUrl } from "@/lib/calendar";
 export default function ContestCard({
   title,
   startTime,
@@ -20,6 +14,7 @@ export default function ContestCard({
   id,
   type,
   isBookmarked,
+  page,
 }: {
   title: string;
   startTime: Date;
@@ -28,6 +23,7 @@ export default function ContestCard({
   contestId: string;
   id: string;
   type: "upcoming" | "past";
+  page?: "bookmarks" | "dashboard" | "home";
   isBookmarked?: boolean;
 }) {
   return (
@@ -45,7 +41,9 @@ export default function ContestCard({
         >
           {platform}
         </Badge>
-        <BookmarkButton contestId={contestId} isBookmarked={isBookmarked} />
+        {page !== "home" && (
+          <BookmarkButton contestId={contestId} isBookmarked={isBookmarked} />
+        )}
       </div>
       <h2 className="text-xl font-semibold mt-4 text-nowrap">
         {title.length > 25 ? title.substring(0, 25) + "..." : title}
@@ -67,7 +65,11 @@ export default function ContestCard({
         <div className="flex justify-between items-center">
           <Link href={"/"}>View Contest</Link>
 
-          <Link href={"/"} className="text-blue-500">
+          <Link
+            target="_blank"
+            href={getCalendarUrl(title, startTime, duration)}
+            className="text-blue-500"
+          >
             Set Reminder
           </Link>
         </div>

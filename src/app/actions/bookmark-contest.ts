@@ -15,7 +15,6 @@ export default async function bookmarkContest(contestId: string) {
 
   const userId = session?.user?.id;
 
-  console.log(userId, contestId);
 
   try {
     const existingBookmark = await prisma.bookmark.findFirst({

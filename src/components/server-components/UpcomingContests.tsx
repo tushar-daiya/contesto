@@ -1,52 +1,7 @@
-import { Contest } from "@/generated/prisma";
-import prisma from "@/lib/prisma";
 import ContestCard from "../ContestCard";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import type { ContestWithBookmark } from "@/lib/types";
 
-async function getData() {
-  try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-    if (!session?.user) {
-      redirect("/auth");
-    }
-    const bookmarks = await prisma.bookmark.findMany({
-      where: {
-        userId: session.user.id,
-      },
-    });
-    const data = await prisma.contest.findMany({
-      where: {
-        startTime: {
-          gte: new Date(),
-        },
-      },
-      orderBy: {
-        startTime: "asc",
-      },
-    });
-
-    return data.map((contest) => {
-      const isBookmarked = bookmarks.some(
-        (bookmark) => bookmark.contestId === contest.contestId
-      );
-      return {
-        ...contest,
-        isBookmarked,
-      };
-    });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
-  }
-}
-
-export default async function UpcomingContests() {
-  const data = await getData();
-  console.log("Upcoming Contests:");
+export default async function UpcomingContests({ data }: { data: ContestWithBookmark[] }) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">Upcoming Contests</h2>

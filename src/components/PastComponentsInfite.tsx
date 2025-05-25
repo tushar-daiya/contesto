@@ -4,13 +4,14 @@ import ContestCard from "./ContestCard";
 import { useEffect, useRef, useState } from "react";
 import { getPastContests } from "@/app/actions/getpastcontests";
 import { useInView } from "framer-motion";
+import type { ContestWithBookmark } from "@/lib/types";
 
 export default function PastComponentsInfinite({
   initialData,
 }: {
-  initialData: Contest[];
+  initialData: ContestWithBookmark[];
 }) {
-  const [contests, setContests] = useState<Contest[]>(initialData);
+  const [contests, setContests] = useState<ContestWithBookmark[]>(initialData);
   const [offset, setOffset] = useState(12);
   const ref = useRef<HTMLDivElement>(null);
   const isinView = useInView(ref);
@@ -23,7 +24,6 @@ export default function PastComponentsInfinite({
 
   useEffect(() => {
     if (isinView) {
-      console.log("Loading more contests...");
       loadMore();
     }
   }, [isinView]);
@@ -31,7 +31,7 @@ export default function PastComponentsInfinite({
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {contests.map((contest: Contest) => (
+        {contests.map((contest: ContestWithBookmark) => (
           <ContestCard
             type="past"
             key={contest.id}
@@ -41,6 +41,7 @@ export default function PastComponentsInfinite({
             platform={contest.platform}
             duration={contest.duration}
             contestId={contest.contestId}
+            isBookmarked={contest.isBookmarked}
           />
         ))}
       </div>

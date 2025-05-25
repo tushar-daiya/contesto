@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import bookmarkContest from "@/app/actions/bookmark-contest";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function BookmarkButton({
   isBookmarked = false,
@@ -19,19 +20,28 @@ export default function BookmarkButton({
   isBookmarked?: boolean;
   contestId: string;
 }) {
+  const router = useRouter();
   const [isBookmarkedState, setIsBookmarkedState] = useState(isBookmarked);
   const handleBookmark = async () => {
-    setIsBookmarkedState(!isBookmarkedState);
+    const newState = !isBookmarkedState;
+    setIsBookmarkedState(newState);
+
     try {
       const res = await bookmarkContest(contestId);
+
       if (res.success) {
         toast.success(res.message);
+
+        // If you're on the bookmarks page and unbookmarking:
+        if (!newState) {
+          router.refresh(); // This will re-trigger the server component and remove the unbookmarked contest
+        }
       } else {
-        setIsBookmarkedState(isBookmarkedState);
+        setIsBookmarkedState(!newState); // Revert state
         toast.error(res.message || "Failed to bookmark contest");
       }
     } catch (error) {
-      setIsBookmarkedState(isBookmarkedState);
+      setIsBookmarkedState(!newState); // Revert state
       toast.error("Failed to bookmark contest");
     }
   };
