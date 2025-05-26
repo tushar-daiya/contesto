@@ -117,7 +117,7 @@ export default function Home() {
         {/* Floating icons */}
         <div className="max-w-7xl overflow-hidden h-screen mx-auto pt-60 flex items-center flex-col relative z-10">
           <motion.div
-            className="absolute top-40 left-10"
+            className="absolute top-40 left-10 -z-50"
             animate={{
               y: [0, -50, 0],
               rotate: [0, 40, 0],
@@ -128,10 +128,10 @@ export default function Home() {
               ease: "easeInOut",
             }}
           >
-            <Code2 className="w-20 h-20 text-primary/50" />
+            <Code2 className="w-12 h-12 sm:w-20 sm:h-20 text-primary/50" />
           </motion.div>
           <motion.div
-            className="absolute top-[60%] right-40"
+            className="absolute top-[60%] md:right-40 right-10 -z-50"
             animate={{
               y: [0, 50, 0],
               rotate: [0, -40, 0],
@@ -142,10 +142,10 @@ export default function Home() {
               ease: "easeInOut",
             }}
           >
-            <Binary className="w-20 h-20 text-primary/50" />
+            <Binary className="w-12 h-12 sm:w-20 sm:h-20 text-primary/50" />
           </motion.div>
           <motion.div
-            className="absolute top-60 right-32"
+            className="absolute top-60 md:right-32 right-10 -z-50"
             animate={{
               y: [0, -30, 0],
               x: [0, 30, 0],
@@ -156,8 +156,9 @@ export default function Home() {
               ease: "easeInOut",
             }}
           >
-            <BrainCircuit className="w-20 h-20 text-primary/50" />
+            <BrainCircuit className="w-12 h-12 sm:w-20 sm:h-20 text-primary/50" />
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -165,9 +166,15 @@ export default function Home() {
           >
             <Badge
               variant={"secondary"}
-              className="text-base rounded-full px-4"
+              className="text-base rounded-full px-4 hidden sm:block"
             >
               The ultimate contest tracker for competitive programmers
+            </Badge>
+            <Badge
+              variant={"secondary"}
+              className="text-sm rounded-full px-3 block sm:hidden"
+            >
+              The ultimate contest tracker
             </Badge>
           </motion.div>
 
@@ -175,7 +182,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-7xl font-bold mt-8 text-center max-w-3xl"
+            className="text-4xl sm:text-7xl font-bold mt-6 sm:mt-8 text-center max-w-3xl px-4"
           >
             Never miss a <span className="text-primary">contest</span> again.
           </motion.h1>
@@ -184,7 +191,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-8 text-lg text-muted-foreground max-w-xl text-center"
+            className="mt-6 sm:mt-8 text-base sm:text-lg text-muted-foreground max-w-xl text-center px-4"
           >
             Track upcoming contests from all major platforms in one place —
             LeetCode, Codeforces, CodeChef, and more.
@@ -197,7 +204,11 @@ export default function Home() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button asChild className="mt-8 text-2xl py-6 px-8" size={"lg"}>
+            <Button
+              asChild
+              className="mt-6 sm:mt-8 text-xl sm:text-2xl py-4 sm:py-6 px-6 sm:px-8"
+              size={"lg"}
+            >
               <Link href={"/auth"}>Get Started</Link>
             </Button>
           </motion.div>
@@ -231,13 +242,22 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex space-x-4 mt-8"
           >
-            <Badge variant={"leetcode"} className="text-lg rounded-full px-4">
+            <Badge
+              variant={"leetcode"}
+              className="sm:text-lg text-sm rounded-full px-4"
+            >
               Leetcode
             </Badge>
-            <Badge variant={"codeforces"} className="text-lg rounded-full px-4">
+            <Badge
+              variant={"codeforces"}
+              className="sm:text-lg text-sm rounded-full px-4"
+            >
               Codeforces
             </Badge>
-            <Badge variant={"codechef"} className="text-lg rounded-full px-4">
+            <Badge
+              variant={"codechef"}
+              className="sm:text-lg text-sm rounded-full px-4"
+            >
               Codechef
             </Badge>
           </motion.div>

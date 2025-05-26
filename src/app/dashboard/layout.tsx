@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import MobileNav from "@/components/MobileNav";
 
 export default async function DashboardLayout({
   children,
@@ -15,8 +16,9 @@ export default async function DashboardLayout({
     redirect("/auth");
   }
   return (
-    <div>
+    <div className="min-h-screen pb-16 md:pb-0">
       {children}
+      <MobileNav />
     </div>
   );
 }

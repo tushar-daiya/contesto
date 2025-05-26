@@ -16,19 +16,16 @@ export default async function Header() {
             <Link href={"/"}>Contesto</Link>
           </div>
           {session?.user ? (
-            <ul className="flex items-center space-x-4 ml-8">
+            <ul className="hidden items-center md:flex space-x-4 ml-8">
               <li>
                 <Link href={"/dashboard"}>Contests</Link>
               </li>
               <li>
                 <Link href={"/dashboard/bookmarks"}>Bookmarks</Link>
               </li>
-              <li>
-                <Link href={"/dashboard/calendar"}>Calendar</Link>
-              </li>
             </ul>
           ) : (
-            <ul className="flex items-center space-x-4 ml-8">
+            <ul className="md:flex hidden items-center space-x-4 ml-8">
               <li>
                 <Link href={"/#contests"}>Contests</Link>
               </li>

@@ -5,6 +5,7 @@ import { Separator } from "./ui/separator";
 import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 import { getCalendarUrl } from "@/lib/calendar";
+
 export default function ContestCard({
   title,
   startTime,
@@ -24,8 +25,20 @@ export default function ContestCard({
   page?: "bookmarks" | "dashboard" | "home";
   isBookmarked?: boolean;
 }) {
+  const getContestUrl = (platform: string, contestId: string) => {
+    switch (platform) {
+      case "leetcode":
+        return `https://leetcode.com/contest/${contestId}`;
+      case "codeforces":
+        return `https://codeforces.com/contest/${contestId}`;
+      case "codechef":
+        return `https://www.codechef.com/${contestId}`;
+      default:
+        return "#";
+    }
+  };
   return (
-    <div className="p-4 border rounded-lg shadow-md bg-card">
+    <div className="p-3 sm:p-4 border rounded-lg shadow-md bg-card">
       <div className="flex items-center justify-between">
         <Badge
           variant={
@@ -35,7 +48,7 @@ export default function ContestCard({
               ? "codeforces"
               : "codechef"
           }
-          className=" text-base rounded-full px-3"
+          className="text-sm sm:text-base rounded-full px-2 sm:px-3"
         >
           {platform}
         </Badge>
@@ -43,25 +56,27 @@ export default function ContestCard({
           <BookmarkButton contestId={contestId} isBookmarked={isBookmarked} />
         )}
       </div>
-      <h2 className="text-xl font-semibold mt-4 text-nowrap">
-        {title.length > 25 ? title.substring(0, 25) + "..." : title}
+      <h2 className="text-lg sm:text-xl font-semibold mt-3 sm:mt-4 line-clamp-1">
+        {title}
       </h2>
       <div className="flex items-center gap-2 mt-2">
         <Calendar className="text-muted-foreground" size={16} />
-        <span className="text-muted-foreground">
+        <span className="text-sm sm:text-base text-muted-foreground">
           {format(startTime, "MMMM d, yyyy")}
         </span>
       </div>
       <div className="flex items-center gap-2 mt-2">
         <Clock className="text-muted-foreground" size={16} />
-        <span className="text-muted-foreground">
+        <span className="text-sm sm:text-base text-muted-foreground">
           {format(startTime, "HH:mm")} - {duration / 3600} hours
         </span>
       </div>
-      <Separator className="bg-accent-foreground/20 my-4" />
+      <Separator className="bg-accent-foreground/20 my-3 sm:my-4" />
       {type === "upcoming" ? (
-        <div className="flex justify-between items-center">
-          <Link href={"/"}>View Contest</Link>
+        <div className="flex justify-between items-center text-sm sm:text-base">
+          <Link target="_blank" href={getContestUrl(platform, contestId)}>
+            View Contest
+          </Link>
 
           <Link
             target="_blank"
@@ -72,7 +87,13 @@ export default function ContestCard({
           </Link>
         </div>
       ) : (
-        <Link href={`/`}>View Contest</Link>
+        <Link
+          target="_blank"
+          href={getContestUrl(platform, contestId)}
+          className="text-sm sm:text-base"
+        >
+          View Contest
+        </Link>
       )}
     </div>
   );
