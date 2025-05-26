@@ -23,47 +23,47 @@ export default function AuthPage() {
   return (
     <>
       <motion.div
-        className="absolute top-40 left-10"
-        animate={{
-          y: [0, -50, 0],
-          rotate: [0, 40, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Code2 className="w-20 h-20 text-primary/50" />
-      </motion.div>
-      <motion.div
-        className="absolute top-[60%] right-40"
-        animate={{
-          y: [0, 50, 0],
-          rotate: [0, -40, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Binary className="w-20 h-20 text-primary/50" />
-      </motion.div>
-      <motion.div
-        className="absolute top-60 right-32"
-        animate={{
-          y: [0, -30, 0],
-          x: [0, 30, 0],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <BrainCircuit className="w-20 h-20 text-primary/50" />
-      </motion.div>
+            className="absolute top-40 left-10 -z-50"
+            animate={{
+              y: [0, -50, 0],
+              rotate: [0, 40, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Code2 className="w-12 h-12 sm:w-20 sm:h-20 text-primary/50" />
+          </motion.div>
+          <motion.div
+            className="absolute top-[80%] md:right-40 right-10 -z-50"
+            animate={{
+              y: [0, 50, 0],
+              rotate: [0, -40, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Binary className="w-12 h-12 sm:w-20 sm:h-20 text-primary/50" />
+          </motion.div>
+          <motion.div
+            className="absolute top-60 md:right-32 right-10 -z-50"
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 30, 0],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <BrainCircuit className="w-12 h-12 sm:w-20 sm:h-20 text-primary/50" />
+          </motion.div>
       <div className="bg-card border p-6 rounded-lg max-w-md">
         <h1 className="text-4xl font-semibold mt-4 tracking-tighter text-center">
           Welcome to <span className="font-bold">Contesto</span>
