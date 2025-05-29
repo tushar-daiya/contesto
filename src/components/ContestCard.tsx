@@ -1,10 +1,10 @@
 import { Calendar, Clock } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { format } from "date-fns";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 import { getCalendarUrl } from "@/lib/calendar";
+import { toZonedTime, format as tzFormat } from "date-fns-tz";
 
 export default function ContestCard({
   title,
@@ -25,6 +25,8 @@ export default function ContestCard({
   page?: "bookmarks" | "dashboard" | "home";
   isBookmarked?: boolean;
 }) {
+  const timeZone = "Asia/Kolkata";
+  const zonedStartTime = toZonedTime(startTime, timeZone);
   const getContestUrl = (platform: string, contestId: string) => {
     switch (platform) {
       case "leetcode":
@@ -62,13 +64,13 @@ export default function ContestCard({
       <div className="flex items-center gap-2 mt-2">
         <Calendar className="text-muted-foreground" size={16} />
         <span className="text-sm sm:text-base text-muted-foreground">
-          {format(startTime, "MMMM d, yyyy")}
+          {tzFormat(zonedStartTime, "MMMM d, yyyy", { timeZone })}
         </span>
       </div>
       <div className="flex items-center gap-2 mt-2">
         <Clock className="text-muted-foreground" size={16} />
         <span className="text-sm sm:text-base text-muted-foreground">
-          {format(startTime, "HH:mm")} - {duration / 3600} hours
+          {tzFormat(zonedStartTime, "HH:mm", { timeZone })} - {duration / 3600} hours
         </span>
       </div>
       <Separator className="bg-accent-foreground/20 my-3 sm:my-4" />
