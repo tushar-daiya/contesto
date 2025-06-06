@@ -10,7 +10,7 @@
     "build": "pnpm run prisma:migrate && next build",
     "start": "next start",
 
-    "prisma:migrate":"prisma migrate deploy",
+    "prisma:migrate":"prisma migrate deploy && prisma generate",
     "db:seed":"prisma db seed",
     "db:reset":"prisma migrate reset",
     "studio":"prisma studio",
