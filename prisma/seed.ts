@@ -90,6 +90,11 @@ async function fetchCodechefContests() {
 
 async function main() {
   try {
+    const contestCount = await prisma.contest.count();
+    if (contestCount > 0) {
+      console.log(`There are already ${contestCount} contests in the database. Skipping seeding.`);
+      return;
+    }
     console.log("Fetching leetCode contests...");
     const leetCodeContests = await fetchLeetCodeContests();
     console.log("Fetching codeforces contests...");
@@ -104,7 +109,14 @@ async function main() {
     console.log("Contests seeded successfully");
   } catch (error) {
     console.error("Error seeding contests:", error);
+    throw error;
+  }
+  finally{
+    await prisma.$disconnect();
   }
 }
 
-main();
+main().catch((e)=>{
+  console.error(e);
+  process.exit(1);
+})

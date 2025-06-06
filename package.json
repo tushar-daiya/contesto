@@ -6,12 +6,17 @@
     "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "scripts": {
-    "dev": "npx prisma generate && next dev",
-    "build": "npm run prisma:generate && next build",
-    "prisma:generate": "npx prisma generate && npx prisma db push",
+    "dev": "prisma generate && next dev",
+    "build": "pnpm run prisma:migrate && next build",
     "start": "next start",
-    "lint": "next lint",
-    "prisma:migrate": "npx prisma migrate dev"
+
+    "prisma:migrate":"prisma migrate deploy",
+    "db:seed":"prisma db seed",
+    "db:reset":"prisma migrate reset",
+    "studio":"prisma studio",
+
+    "prisma:docker": "pnpm run prisma:migrate && pnpm run db:seed",
+    "dev:docker":"pnpm run prisma:docker && pnpm run dev"
   },
   "dependencies": {
     "@prisma/client": "6.8.2",
