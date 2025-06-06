@@ -64,5 +64,5 @@ jobs:
               -p $PORT:3000 \
               $IMAGE
 
-            docker stop contesto-$ACTIVE
-            docker rm contesto-$ACTIVE
+            docker stop contesto-$ACTIVE || true
+            docker rm contesto-$ACTIVE || true
