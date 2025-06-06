@@ -63,6 +63,11 @@ jobs:
               --env-file $PROJECT_DIR/.env \
               -p $PORT:3000 \
               $IMAGE
+            
+            NGINX_CONFIG="/etc/nginx/nginx.conf"
+            sed -i "s/proxy_pass http:\/\/localhost:[0-9]*;/proxy_pass http:\/\/localhost:$PORT;/" $NGINX_CONFIG
+            nginx -t && nginx -s reload
+
 
             docker stop contesto-$ACTIVE || true
             docker rm contesto-$ACTIVE || true
