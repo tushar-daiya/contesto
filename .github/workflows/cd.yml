@@ -41,6 +41,8 @@ jobs:
             IMAGE=${{ secrets.DOCKER_USERNAME }}/contesto:${{ github.sha }}
             PROJECT_DIR=/home/${{ secrets.SSH_USERNAME }}/contesto
 
+            mkdir -p $PROJECT_DIR
+
             echo "${{secrets.ENV_FILE}}" > $PROJECT_DIR/.env
 
             cd $PROJECT_DIR
