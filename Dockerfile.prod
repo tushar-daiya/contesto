@@ -12,7 +12,6 @@ COPY . .
 
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
-RUN npx prisma generate
 RUN pnpm run build
 
 FROM node:20-alpine AS production
@@ -21,6 +20,7 @@ RUN npm install -g pnpm
 
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/prisma ./prisma
+COPY --from=builder /usr/src/app/generated ./generated
 COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder /usr/src/app/package.json ./
