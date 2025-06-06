@@ -1,4 +1,4 @@
-# 🏆 Contesto
+# Contesto
 **Contesto** is a web app that brings together all coding contests from Codeforces, CodeChef, and LeetCode in one unified platform. Whether you're a competitive programmer or just starting out, Contesto helps you stay updated, bookmark your favorite contests, and even set Google Calendar reminders — all from a single dashboard.
 
 
