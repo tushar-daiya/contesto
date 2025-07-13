@@ -32,7 +32,7 @@ export default function ContestCard({
       case "leetcode":
         return `https://leetcode.com/contest/${contestId}`;
       case "codeforces":
-        return `https://codeforces.com/contest/${contestId}`;
+        return `https://codeforces.com/contests/${contestId}`;
       case "codechef":
         return `https://www.codechef.com/${contestId}`;
       default:
